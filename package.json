@@ -1,0 +1,43 @@
+{
+  "name": "webrtc_front",
+  "version": "1.0.0",
+  "description": "node v17.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YongGyun-Kim/webRTC_Front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YongGyun-Kim/webRTC_Front/issues"
+  },
+  "homepage": "https://github.com/YongGyun-Kim/webRTC_Front#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/react": "^17.0.41",
+    "@types/react-dom": "^17.0.14",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "scss-loader": "^0.0.1",
+    "styled-components": "^5.3.3",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "react-router-dom": "^6.2.2",
+    "socket.io-client": "^4.4.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
