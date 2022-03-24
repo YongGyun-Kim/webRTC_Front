@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Video from "@presenter/Video";
 import { useNavigate } from "react-router-dom";
 import { emitRegistrationQueue } from "@api/socket";
+import { streamState, peerConnectionState } from "@recoil/state";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 function LobbyContainer() {
-  const [peerConnection, setPeerConnection] = useState<RTCPeerConnection>();
-  const [sstream, setStream] = useState<MediaStream>();
+  const [stream, setStream] = useRecoilState<MediaStream>(streamState);
+  const [peerConnection, setPeerConnection] = useRecoilState<RTCPeerConnection>(peerConnectionState);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,16 +19,16 @@ function LobbyContainer() {
       return media;
     };
 
-    const addTrack = async (peer: RTCPeerConnection, media: MediaStream) => {
+    const addTrack = async (media: MediaStream) => {
       const tracks = await media.getTracks();
       tracks.forEach((track) => {
-        peer.addTrack(track, media);
+        peerConnection.addTrack(track, media);
       });
     };
 
     const initCall = async () => {
       const media = await getMedia();
-      const tempPeer = new RTCPeerConnection({
+      const tempPeerConnection = new RTCPeerConnection({
         iceServers: [
           {
             urls: [
@@ -39,11 +41,12 @@ function LobbyContainer() {
           },
         ],
       });
-      tempPeer.ontrack = (event) => {
+      tempPeerConnection.ontrack = (event) => {
         event.streams[0];
       };
-      await addTrack(tempPeer, media);
+      await addTrack(media);
       setStream(media);
+      setPeerConnection(tempPeerConnection);
     };
 
     initCall();
@@ -57,7 +60,7 @@ function LobbyContainer() {
   return (
     <>
       Lobby
-      <Video stream={sstream} />
+      <Video stream={stream} />
       <button>Mute</button>
       <button>Camera</button>
       <button onClick={join}>Join</button>

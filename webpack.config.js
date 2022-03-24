@@ -38,6 +38,7 @@ module.exports = {
       "@presenter": path.resolve(__dirname, "src/presenter"),
       "@entities": path.resolve(__dirname, "src/domain/entities"),
       "@useCase": path.resolve(__dirname, "src/domain/useCase"),
+      "@recoil": path.resolve(__dirname, "src/recoil"),
     },
     extensions: [".jsx", ".tsx", ".ts", ".js", ".json"],
   },

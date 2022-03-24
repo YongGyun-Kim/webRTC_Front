@@ -1,8 +1,8 @@
 import { atom, selector } from "recoil";
 
-export const PEER_CONNECTION_KEY = "peer_connection_key";
-export const STREAM_TRACK_KEY = "stream_track_key";
-export const STREAM_KEY = "stream_key";
+const PEER_CONNECTION_KEY = "peer_connection_key";
+const STREAM_TRACK_KEY = "stream_track_key";
+const STREAM_KEY = "stream_key";
 
 export const streamState = atom({ key: STREAM_KEY, default: null });
 export const peerConnectionState = atom({
