@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import LobbyContainer from "@container/LobbyContainer";
 import RoomContainer from "@container/RoomContainer";
 
 import { connect } from "@api/socket";
-import { RecoilRoot } from "recoil";
 
 function App() {
   useEffect(() => {

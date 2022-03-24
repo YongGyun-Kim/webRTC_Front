@@ -33,6 +33,11 @@ module.exports = {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     alias: {
       "@src": path.resolve(__dirname, "src"),
+      "@api": path.resolve(__dirname, "src/api"),
+      "@container": path.resolve(__dirname, "src/container"),
+      "@presenter": path.resolve(__dirname, "src/presenter"),
+      "@entities": path.resolve(__dirname, "src/domain/entities"),
+      "@useCase": path.resolve(__dirname, "src/domain/useCase"),
     },
     extensions: [".jsx", ".tsx", ".ts", ".js", ".json"],
   },

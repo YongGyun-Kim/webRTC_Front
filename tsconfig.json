@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-
     "module": "es6",
     "target": "es6",
     "jsx": "react",
@@ -11,7 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@src/*": ["./src/*"],
+      "@api/*": ["./src/api/*"],
+      "@container/*": ["./src/container/*"],
+      "@presenter/*": ["./src/presenter/*"],
+      "@entities/*": ["./src/domain/entities/*"],
+      "@useCase/*": ["./src/domain/useCase/*"]
     }
   },
   "compileOnSave": false,
