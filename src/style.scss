@@ -1,0 +1,31 @@
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.child-mr-1 > * {
+  margin-right: 0.25rem;
+}
+.child-mr-2 > * {
+  margin-right: 0.5rem;
+}
+
+.justify-content-space-between {
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.text-align-center {
+  text-align: center;
+}

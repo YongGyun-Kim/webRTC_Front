@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import LobbyContainer from "@container/LobbyContainer";
 import RoomContainer from "@container/RoomContainer";
+import "./style.scss";
 
 import { connect } from "@api/socket";
 

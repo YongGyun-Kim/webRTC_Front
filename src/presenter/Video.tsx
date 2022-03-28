@@ -8,6 +8,8 @@ const VideoTag = styled.video.attrs((props) => ({
   width: 400px;
   height: 400px;
   transform: rotateY(180deg);
+  border: 1px solid #acacac;
+  border-radius: 10px;
 `;
 
 function Video(props: { stream: MediaStream }) {

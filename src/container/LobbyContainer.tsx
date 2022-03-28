@@ -4,6 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { emitRegistrationQueue } from "@api/socket";
 import { streamState, peerConnectionState } from "@recoil/state";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import styled from "styled-components";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+
+const LobbyTag = styled.div`
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
 
 function LobbyContainer() {
   const [stream, setStream] = useRecoilState<MediaStream>(streamState);
@@ -17,13 +28,6 @@ function LobbyContainer() {
         audio: false,
       });
       return media;
-    };
-
-    const addTrack = async (media: MediaStream) => {
-      const tracks = await media.getTracks();
-      tracks.forEach((track) => {
-        peerConnection.addTrack(track, media);
-      });
     };
 
     const initCall = async () => {
@@ -41,12 +45,14 @@ function LobbyContainer() {
           },
         ],
       });
-      tempPeerConnection.ontrack = (event) => {
-        event.streams[0];
-      };
-      await addTrack(media);
-      setStream(media);
+
+      const tracks = await media.getTracks();
+      tracks.forEach((track) => {
+        tempPeerConnection.addTrack(track, media);
+      });
       setPeerConnection(tempPeerConnection);
+      // await addTrack(media);
+      setStream(media);
     };
 
     initCall();
@@ -58,13 +64,19 @@ function LobbyContainer() {
   };
 
   return (
-    <>
-      Lobby
-      <Video stream={stream} />
-      <button>Mute</button>
-      <button>Camera</button>
-      <button onClick={join}>Join</button>
-    </>
+    <LobbyTag>
+      <div>
+        <Video stream={stream} />
+
+        <Stack direction="row" spacing={2} justifyContent="center">
+          {/* <Button variant="contained">Mute</Button>
+          <Button variant="contained">Camera</Button> */}
+          <Button variant="contained" onClick={join}>
+            Join
+          </Button>
+        </Stack>
+      </div>
+    </LobbyTag>
   );
 }
 
