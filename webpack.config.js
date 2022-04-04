@@ -42,6 +42,7 @@ module.exports = {
       "@entities": path.resolve(__dirname, "src/domain/entities"),
       "@useCase": path.resolve(__dirname, "src/domain/useCase"),
       "@recoil": path.resolve(__dirname, "src/recoil"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
     },
     extensions: [".jsx", ".tsx", ".ts", ".js", ".json"],
   },
