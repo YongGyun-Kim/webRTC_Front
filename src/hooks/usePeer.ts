@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { streamState, peerConnectionState } from "@recoil/state";
+import { emitAnswer, emitIce, emitOffer } from "@api/socket";
 
 function usePeer() {
   const [stream, setStream] = useRecoilState<MediaStream>(streamState);
@@ -42,7 +43,58 @@ function usePeer() {
     return media;
   };
 
-  return { initCall: initCall };
+  const joinUser = async (data) => {
+    handleCandidate(data);
+    createDataChannel("chat");
+    const offer = await createOffer();
+    emitOffer(offer, data.id);
+  };
+
+  const handleCandidate = (data) => {
+    peerConnection.onicecandidate = (iceData) => {
+      emitIce(iceData.candidate, data.id);
+    };
+  };
+
+  const createDataChannel = (channelName: string) => {
+    const dataChannel = peerConnection.createDataChannel(channelName);
+    dataChannel.onmessage = (e) => {
+      console.log("onMessage ", e);
+    };
+  };
+
+  const createOffer = async () => {
+    const offer = await peerConnection.createOffer();
+    peerConnection.setLocalDescription(offer);
+    return offer;
+  };
+
+  const receiveOffer = async (offer, peerId) => {
+    onDataChannelMessage();
+    peerConnection.setRemoteDescription(offer);
+    const answer = await peerConnection.createAnswer();
+    peerConnection.setLocalDescription(answer);
+    emitAnswer(answer, peerId);
+  };
+
+  const onDataChannelMessage = () => {
+    peerConnection.ondatachannel = (event) => {
+      const dataChannel = event.channel;
+      dataChannel.onmessage = (e) => {
+        console.log("onMessage ", e);
+      };
+    };
+  };
+
+  const setRemoteDescription = (data) => {
+    peerConnection.setRemoteDescription(data);
+  };
+
+  const addIceCandidate = (ice) => {
+    peerConnection.addIceCandidate(ice);
+  };
+
+  return { initCall, joinUser, receiveOffer, setRemoteDescription, addIceCandidate };
 }
 
 export default usePeer;

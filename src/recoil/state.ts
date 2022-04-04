@@ -26,3 +26,5 @@ export const dataChannelState = atom({
   key: DATA_CHANNEL_KEY,
   default: null,
 });
+
+export const userStreamsState = atom({ key: "", default: null });
